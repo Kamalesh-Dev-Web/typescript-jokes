@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import Categories from "./Categories";
 
 //TYpes
 
@@ -22,7 +23,7 @@ export interface JokeType {
 //   value: "",
 // };
 
-function App() {
+const App: React.FC = () => {
   const [joke, setJoke] = useState<JokeType[]>([]);
 
   useEffect(() => {
@@ -35,24 +36,35 @@ function App() {
 
   return (
     <div className="App">
-      <h1 style={{ fontFamily: "Bungee Shade", color: "orange" }}>
+      <h1
+        style={{
+          fontFamily: "Bungee Shade",
+          color: "orange",
+          textAlign: "center",
+        }}
+      >
         Chuck Norris Jokes
       </h1>
-      {joke.length <= 0 ? (
-        <h1>Loading....</h1>
-      ) : (
-        joke.map((jo: JokeType, index) => {
-          return (
-            <div key={jo.id}>
-              <h4>
-                {index + 1}.{jo.value}
-              </h4>
-            </div>
-          );
-        })
-      )}
+      <div style={{ display: "flex" }}>
+        <Categories />
+        <div style={{ width: "80%" }}>
+          {joke.length <= 0 ? (
+            <h1>Loading....</h1>
+          ) : (
+            joke.map((jo: JokeType, index) => {
+              return (
+                <div key={jo.id}>
+                  <h4>
+                    {index + 1}.{jo.value}
+                  </h4>
+                </div>
+              );
+            })
+          )}
+        </div>
+      </div>
     </div>
   );
-}
+};
 
 export default App;

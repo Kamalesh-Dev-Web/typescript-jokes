@@ -2,8 +2,11 @@ body {
   margin: 0;
   font-family: "Press Start 2P", sans-serif;
   font-size: 0.75rem;
+  background-color: #e8e1d9;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  line-height: 2;
+  padding: 0;
 }
 
 code {
