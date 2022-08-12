@@ -6,4 +6,4 @@ Generate a random chuck norris joke from many categories.
 
 Hola ! use tha zoke abb... boi
 
-![Alt text](../ty-shopping-cart/src/assets/Screenshot.png "Screen View")
+![Scrren View](../ty-shopping-cart/src/assets/Screenshot.png "Screen View")
