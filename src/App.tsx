@@ -13,25 +13,26 @@ export interface JokeType {
   value: string;
 }
 
-// const empty = {
-//   categories: [""],
-//   created_at: "",
-//   icon_url: "",
-//   id: "",
-//   updated_at: "",
-//   url: "",
-//   value: "",
-// };
+const empty = {
+  categories: [""],
+  created_at: "",
+  icon_url: "",
+  id: "",
+  updated_at: "",
+  url: "",
+  value: "",
+};
 
 const App: React.FC = () => {
-  const [joke, setJoke] = useState<JokeType[]>([]);
+  const [joke, setJoke] = useState<JokeType>(empty);
+  const [category, setCategory] = useState("animal");
 
   useEffect(() => {
-    fetch("https://api.chucknorris.io/jokes/search?query=sea")
+    fetch(`https://api.chucknorris.io/jokes/random?category=${category}`)
       .then((response) => response.json())
-      .then((res) => setJoke(res.result.slice(10)))
+      .then((res) => setJoke(res))
       .catch((err) => console.log(err));
-  }, []);
+  }, [category]);
   console.log(joke);
 
   return (
@@ -41,26 +42,27 @@ const App: React.FC = () => {
           fontFamily: "Bungee Shade",
           color: "orange",
           textAlign: "center",
+          fontSize: "30px",
         }}
       >
-        Chuck Norris Jokes
+        Random Chuck Norris Joke Generator
       </h1>
       <div style={{ display: "flex" }}>
-        <Categories />
-        <div style={{ width: "80%" }}>
-          {joke.length <= 0 ? (
-            <h1>Loading....</h1>
-          ) : (
-            joke.map((jo: JokeType, index) => {
-              return (
-                <div key={jo.id}>
-                  <h4>
-                    {index + 1}.{jo.value}
-                  </h4>
-                </div>
-              );
-            })
-          )}
+        <Categories category={category} setCategory={setCategory} />
+        <div
+          style={{
+            width: "74%",
+            fontSize: "20px",
+            border: "2px solid orange",
+            borderRadius: "10px",
+            display: "flex",
+            alignItems: "center",
+            height: "83vh",
+            justifyContent: " center",
+            padding:'0 10px 0 10px'
+          }}
+        >
+          {joke.value === "" ? <h1>Loading....</h1> : <h4>{joke.value}</h4>}
         </div>
       </div>
     </div>
